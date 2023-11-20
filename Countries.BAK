@@ -1,0 +1,28 @@
+domains
+city,country,region,continent=symbol
+
+predicates
+nondeterm f(city,country,region,continent)
+nondeterm a(city,country)
+nondeterm b(city,region)
+nondeterm c(city,continent)
+
+clauses
+f(budapest,romain,sweuropa,europa).
+f(paris,france,eeuropa,europa).
+f(dushanbe,tajikistan,crasia,asia).
+f(newdeli,india,sasia,asia).
+f(manhattan,usa,newyork,america).
+f(ottava,canada,samerica,america).
+f(brasilia,brasiliya,samerica,america).
+f(santyago,chili,seamerica,america).
+f(canberra,australia,neaustralia,australia).
+f(khartoum,sudan,safrica,africa).
+f(mogadisho,somali,wafrica,africa).
+
+a(X,Y):-f(X,Y,_,asia).
+b(X,Y):-f(X,_,Y,europa).
+c(X,Y):-f(X,_,_,Y).
+
+goal
+c(X,Y).

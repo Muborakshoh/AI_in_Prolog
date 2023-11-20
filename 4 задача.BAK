@@ -1,0 +1,56 @@
+domains 
+person, g = symbol
+
+
+predicates 
+nondeterm parent(person, person)
+nondeterm is_parents(person, person)
+nondeterm write_parents(person, person)
+nondeterm write_grantparents(person, person)
+nondeterm gender(person,g)
+nondeterm wifi(person, person)
+nondeterm has_parents(person) 
+nondeterm has_sibling(person)
+nondeterm has_sister(person, person)
+nondeterm grandchild(person, person)
+
+clauses
+parent("ivan","nina") .
+parent("ivan","oleg") .
+parent("anna","nina") .
+parent("anna","oleg") .
+parent("oleg","alla") .
+parent("oleg","larisa") .
+parent("vera","alla") .
+parent("vera","larisa") .
+parent("larisa","natalia") .
+parent("victor","natalia") .
+
+gender("ivan","male").
+gender("anna","female").
+gender("nina","female").
+
+gender("oleg","male").
+gender("vera","female").
+
+gender("alla","female").
+gender("larisa","female").
+gender("victor","male").
+gender("natalia","female").
+
+is_parents(Person, Child) :- parent(Person, Child), write("Yes") ,nl,!; write("No"), nl.
+write_parents(X, Y)  :-  parent(X, Y).
+write_grantparents(X,Y) :- parent(Z, Y), parent(X,Z).
+wifi(W,H) :-  parent(W,X), parent(H, X), gender(W, "female"),!. 
+has_parents (X):- parent(F,X),parent(M, X), F<>M.
+has_sibling(X) :- parent(Parent, X),parent(Parent, Brother), gender(Brother,"male"), Brother<>X.
+has_sister(X,Y) :- parent(Parent, X),parent(Parent, Sister), gender(Sister,"female"), Sister<>X, Y=Sister,!.
+grandchild(Grandchild, Grandparent) :- parent(X, Grandchild), parent(Grandparent, X).
+      
+       
+
+goal
+%write_grantparents(G,"alla").
+is_parents("victor",Child).
+
+
